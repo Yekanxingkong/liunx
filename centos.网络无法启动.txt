@@ -1,0 +1,15 @@
+https://blog.51cto.com/u_15469167/4852857
+
+运行 ifconfig 看不到 IPv4 地址(看不到 192.168.xx.xx )
+不能 ping 通 ​​www.baidu.com​
+
+运行以下命令（需要有 root 权限）：dhclient -v：
+echo dhclient -v >> c.sh
+chmod +x c.sh
+再运行命令
+ip addr
+
+cd /etc/sysconfig/network-scripts/
+vi ifcfg-ens33
+我们需要首先找到ONBOOT=no ，需要修改为ONBOOT=yes然后保存退出。
+service network restart #重启网络服务
