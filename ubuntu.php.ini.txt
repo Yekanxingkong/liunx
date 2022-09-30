@@ -1,0 +1,7 @@
+nano /etc/php/8.1/fpm/php.ini
+max_execution_time = 300
+memory_limit = 256M
+post_max_size = 32M
+upload_max_filesize = 32M
+max_input_time = 300
+date.timezone = America/New_York
