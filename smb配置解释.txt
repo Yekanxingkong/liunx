@@ -1,0 +1,30 @@
+
+
+配置文件位置
+sudo nano /etc/samba/smb.conf
+
+[share]
+comment = share directories
+path = /home/share 
+public = yes 
+writable = yes
+workgroup = ubuntu
+browseable = yes
+
+
+
+
+下面是对配置的简单注释
+[www]     //共享文件夹的名称
+comment = '这是该共享的注释'   //注释
+path = /var/www  //路径
+public = yes          //是否开放yes不需要密码
+writable = yes       //是否可写
+valid users = www //访问的用户
+create mask = 0777   //创建权限 （0777为最大权限）
+directory mask = 0777 //目录权限 
+force user = nobody    //目标用户
+force group = nogroup//目标组
+available = yes              //是否启用
+browseable = yes         //是否可浏览
+workgroup = ubuntu //用户组
