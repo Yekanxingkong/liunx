@@ -1,0 +1,41 @@
+lsblk 查看磁盘分区
+sudo fdisk -l 查看磁盘列表
+sudo mount /dev/sdb1 /mnt/sdb1_newdisk/ 临时挂载目录
+mkdir  /mnt/sdb1_newdisk 创建挂载目录
+touch file1.txt #创建一个文件
+sudo blkid   查看磁盘的UUID
+复写擦除该分区数据
+sudo shred /dev/sdj3
+ssh关闭后，后台仍然运行
+nohup sudo shred /dev/sdi1 &
+
+sudo fdisk /dev/sdi 进行分区操作
+	d 删除分区
+	p 显示分区
+	q 不保存退出
+	n 创建分区
+	w 保存分区
+
+nano /etc/fstab
+------------------------------------------------------------------------------------------------------------------
+#/dev/sdf3:
+UUID=0FEE15010FEE1501   /media/电影2016-2020      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#/dev/sdd3:
+UUID=0D0D1B750D0D1B75   /media/电视剧      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#/dev/sde3:
+UUID=0C5C18DB0C5C18DB   /media/数据库      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+UUID=225A6D42D4FA828F   /media/电影2021-2025      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#/dev/sda3:
+UUID=0F640CA20F640CA2   /media/电影1900-2015      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#最后的0为开机检测，1为开机不检测，如果磁盘无法挂载会无法启动
+------------------------------------------------------------------------------------------------------------------
+
+
+sudo mount /dev/sdg3 /media/sdg4T
+sudo mount /dev/sdi3 /media/sdi3
+sudo mount /dev/sdi4 /media/sdiAV3T
+
+ssh关闭后，后台仍然运行
+nohup sudo shred /dev/sdh3 &
+
+sudo fdisk /dev/sdi

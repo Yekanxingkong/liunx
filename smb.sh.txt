@@ -6,7 +6,6 @@ sudo /etc/init.d/samba restart
 sudo /etc/init.d/samba-ad-dc restart
 sleep 5
 echo ------------------写入配置文件----------------
-basepath=$(cd `dirname $0`; pwd)
 sudo sed -i '$a\[ubuntu] \
 comment = share directories \
 path = /home \
@@ -14,7 +13,7 @@ public = yes \
 writable = yes \
 workgroup = ubuntu \
 browseable = yes
-' $basepath/a.txt
+' /etc/samba/smb.conf
 
 sudo sed -i '$a\[share] \
 comment = share directories \
@@ -23,7 +22,7 @@ public = yes \
 writable = yes \
 workgroup = ubuntu \
 browseable = yes
-' $basepath/a.txt
+' /etc/samba/smb.conf
 echo ------------------重启----------------
 sudo /etc/init.d/samba restart
 sudo /etc/init.d/samba-ad-dc restart
