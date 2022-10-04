@@ -9,12 +9,29 @@ sudo shred /dev/sdj3
 ssh关闭后，后台仍然运行
 nohup sudo shred /dev/sdi1 &
 
-sudo fdisk /dev/sdi 进行分区操作
+sudo fdisk /dev/sdk 进行分区操作
 	d 删除分区
 	p 显示分区
 	q 不保存退出
 	n 创建分区
 	w 保存分区
+
+创建RAID 1磁盘阵列
+sudo mdadm --create --verbose /dev/md1 --level=1 --raid-devices=2 /dev/sdh /dev/sdi
+查看磁盘阵列创建的结果
+sudo mdadm --detail /dev/md1
+创建ext4的文件系统
+mkfs.ext4 /dev/md1
+挂载阵列
+sudo mount /dev/md1 /media/md1.hi
+赋予权限
+sudo chmod -R 777 /media/md1.hi
+
+ssh关闭后，后台仍然运行
+nohup sudo shred /dev/sdg1 &
+
+卸载分区
+sudo umount /dev/sdg3
 
 nano /etc/fstab
 ------------------------------------------------------------------------------------------------------------------
@@ -31,11 +48,10 @@ UUID=0F640CA20F640CA2   /media/电影1900-2015      ntfs    defaults,utf8,uid=10
 ------------------------------------------------------------------------------------------------------------------
 
 
-sudo mount /dev/sdg3 /media/sdg4T
+sudo mount /dev/sdg1 /media/sdg4T
 sudo mount /dev/sdi3 /media/sdi3
 sudo mount /dev/sdi4 /media/sdiAV3T
 
-ssh关闭后，后台仍然运行
-nohup sudo shred /dev/sdh3 &
 
 sudo fdisk /dev/sdi
+

@@ -1,8 +1,7 @@
 #nano c.sh
 #sudo sh c.sh
 echo ------------配置nginx和http日志----------------
-es_index="
-server {
+es_index="server {
         listen 80 default_server;
         listen [::]:80 default_server;
         root /var/www/html;
