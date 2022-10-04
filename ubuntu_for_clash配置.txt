@@ -1,0 +1,12 @@
+https://www.cfmem.com/2021/09/linux-clash-for-windows-vpnv2ray.html
+参考网页
+https://github.com/Fndroid/clash_for_windows_pkg/releases
+下载地址
+下载解压，放置合理位置，输入该命令
+/usr/local/bin/"Clash for Windows-0.20.5-x64-linux"/cfw
+
+启动后在，系统设置——网络VPN/代理——设置手动
+输入clash上的端口：127.0.0.1:7890
+
+error:
+版本不对，多尝试几个
