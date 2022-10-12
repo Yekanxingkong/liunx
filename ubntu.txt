@@ -1,0 +1,35 @@
+sudo apt-get update -y
+sudo apt-get upgrade -y
+
+sudo apt-get install fcitx-googlepinyin -y
+	
+sudo apt-get install telegram-desktop -y
+
+sudo apt-get install mpv -y
+
+sudo apt-get install speedtest-cli -y
+
+sudo apt-get install smbclient -y
+
+sudo apt-get install python3-pip -y
+
+snap install onlyoffice-desktopeditors
+
+#该操作需要shh完成，解决MPEG-4 AAC 解码器和 H.264 解码器
+sudo apt-get install ubuntu-restricted-extras -y
+
+rdesktop -g 1920x1180 -r sound:local 192.168.2.190 -u Administrator -p 123456
+rdesktop -g 1920x1180 192.168.2.190 -a 32 -u Administrator -p 123456
+#查找进程，
+ps -ef |grep Telegram
+#第三个数据为进程位置
+cd /proc/2488
+
+mkdir 创建目录
+
+sudo lsof -i tcp:7890
+sudo kill
+
+sudo mount -o username=Administrator //192.168.2.102/ubuntu /home/ubuntu/桌面/192.168.2.102
+sudo umount //192.168.2.102/ubuntu
+
