@@ -19,6 +19,28 @@ sudo fdisk /dev/sdk 进行分区操作
 	n 创建分区
 	w 保存分区
 
+sudo parted /dev/sda 超过2T的盘分区操作
+P查看磁盘
+parted创建分区里的交互模式的操作说明
+mklabel   gpt                         定义分区表格式（常用的有msdos和gpt分区表格式，msdos不支持2TB以上容量的磁盘，所以大于2TB的磁盘选gpt分区表格式）
+(parted)  mkpart  p1                  创建第一个分区，名称为p1（p1只是第一个分区的名称，用别的名称也可以，如part1）。如果只创建一个分区，可以不用写分区名，默认即可。如上。
+File system type？  [ext2]?  ext4     定义分区格式。（不支持ext4的，想分ext4格式的分区，可以通过mkfs.ext4格式化成ext4格式）
+Start？  17.4kB                            定义分区的起始位置（单位支持K,M,G,T）
+End？    300G                         定义分区的结束位置（单位支持K,M,G,T）。如果创建多个分区，下一个分区的Start就从上一个分区的End开始
+(parted)    print或在p                查看当前分区情况
+quit                                  退出
+ 
+删除分区
+(parted)    rm                        rm删除命令（删除之前必须确保分区没有被挂载）
+Partition number？ 1                  删除第一个分区 （通过p可以查看到，查看结果中的第一列）
+(parted)    print或在p                查看当前分区情况
+quit                                  退出
+https://www.cnblogs.com/kevingrace/p/7612741.html
+https://manpages.ubuntu.com/manpages/bionic/man8/parted.8.html
+
+
+
+
 创建RAID 1磁盘阵列
 sudo mdadm --create --verbose /dev/md1 --level=1 --raid-devices=2 /dev/sdh /dev/sdi
 停止阵列 
@@ -39,8 +61,13 @@ nohup sudo shred /dev/sdg1 &
 
 卸载分区
 sudo umount /dev/sdg3
+执行全部挂载,不用重启
+sudo mount -a
 
 nano /etc/fstab
+挂载磁盘后，使用权限
+ntfs    defaults,utf8,uid=1000,gid=1000, umask=000
+ext4 	users,noauto,noatime,diratime
 ------------------------------------------------------------------------------------------------------------------
 #/dev/sdc3:
 UUID=0FEE15010FEE1501   /media/电影2016-2020      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
@@ -48,14 +75,16 @@ UUID=0FEE15010FEE1501   /media/电影2016-2020      ntfs    defaults,utf8,uid=10
 UUID=0D0D1B750D0D1B75   /media/电视剧      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
 #/dev/sdf3:
 UUID=0C5C18DB0C5C18DB   /media/数据库      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
-#/dev/sde：
-UUID=03a848b0-03dc-4fc0-9d2e-e41bc48c18c6   /media/Movie2      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#/dev/sde:
+UUID="91710f38-2a36-4259-8384-805432b92292"		/media/Movie2 	ext4 	users,noauto,noatime,diratime 0 0
 #/dev/sda:
-UUID=a0a37908-9289-4c99-ad8c-91077d0f830a   /media/Movie1      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+UUID="e74142f9-338a-4117-9c3b-9f3c95410243"		/media/Movie1	ext4	users,noauto,noatime,diratime 0 0
+UUID="9e036d68-0915-4af3-8160-8ded83fa998d"		/media/临时存储	ext4	users,noauto,noatime,diratime 0 0
+UUID="e7c88805-22d6-4b02-bfa8-d0fb0ac7a63e"		/media/sdg4T	ext4	users,noauto,noatime,diratime 0 0
 #最后的0为开机检测，1为开机不检测，如果磁盘无法挂载会无法启动
 ------------------------------------------------------------------------------------------------------------------
 
 
-sudo mount /dev/sdg /media/sdg4T
-sudo mount /dev/sdh /media/临时存储
+sudo mount /dev/sdg1 
+sudo mount /dev/sdh1 
 
