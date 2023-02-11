@@ -8,6 +8,9 @@ sudo blkid   查看磁盘的UUID
 sudo shred /dev/sdj3
 ssh关闭后，后台仍然运行
 nohup sudo shred /dev/sdi1 &
+清理loop
+sudo apt autoremove --purge snapd
+
 
 sudo fdisk /dev/sdk 进行分区操作
 	d 删除分区
@@ -18,10 +21,14 @@ sudo fdisk /dev/sdk 进行分区操作
 
 创建RAID 1磁盘阵列
 sudo mdadm --create --verbose /dev/md1 --level=1 --raid-devices=2 /dev/sdh /dev/sdi
+停止阵列 
+mdadm -S /dev/
+删除阵列
+mdadm --misc --zero-superblock /dev/
 查看磁盘阵列创建的结果
 sudo mdadm --detail /dev/md1
-创建ext4的文件系统
-mkfs.ext4 /dev/md1
+创建ext4的文件系统，格式化分区
+sudo mkfs.ext4 /dev/md1
 挂载阵列
 sudo mount /dev/md1 /media/md1.hi
 赋予权限
@@ -35,23 +42,20 @@ sudo umount /dev/sdg3
 
 nano /etc/fstab
 ------------------------------------------------------------------------------------------------------------------
-#/dev/sdf3:
+#/dev/sdc3:
 UUID=0FEE15010FEE1501   /media/电影2016-2020      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
 #/dev/sdd3:
 UUID=0D0D1B750D0D1B75   /media/电视剧      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
-#/dev/sde3:
+#/dev/sdf3:
 UUID=0C5C18DB0C5C18DB   /media/数据库      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
-UUID=225A6D42D4FA828F   /media/电影2021-2025      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
-#/dev/sda3:
-UUID=0F640CA20F640CA2   /media/电影1900-2015      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#/dev/sde：
+UUID=03a848b0-03dc-4fc0-9d2e-e41bc48c18c6   /media/Movie2      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+#/dev/sda:
+UUID=a0a37908-9289-4c99-ad8c-91077d0f830a   /media/Movie1      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
 #最后的0为开机检测，1为开机不检测，如果磁盘无法挂载会无法启动
 ------------------------------------------------------------------------------------------------------------------
 
 
-sudo mount /dev/sdg1 /media/sdg4T
-sudo mount /dev/sdi3 /media/sdi3
-sudo mount /dev/sdi4 /media/sdiAV3T
-
-
-sudo fdisk /dev/sdi
+sudo mount /dev/sdg /media/sdg4T
+sudo mount /dev/sdh /media/临时存储
 
