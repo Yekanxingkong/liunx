@@ -61,30 +61,29 @@ nohup sudo shred /dev/sdg1 &
 
 卸载分区
 sudo umount /dev/sdg3
+sudo umount -a
 执行全部挂载,不用重启
 sudo mount -a
-
+df -Th 查询硬盘
 nano /etc/fstab
 挂载磁盘后，使用权限
 ntfs    defaults,utf8,uid=1000,gid=1000, umask=000
-ext4 	users,noauto,noatime,diratime
+auto 	rw,user,nofail
 ------------------------------------------------------------------------------------------------------------------
 #/dev/sdc3:
-UUID=0FEE15010FEE1501   /media/电影2016-2020      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+UUID=0FEE15010FEE1501   /media/电影2016-2020      	ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
 #/dev/sdd3:
-UUID=0D0D1B750D0D1B75   /media/电视剧      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+UUID=0D0D1B750D0D1B75   /media/电视剧      			ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
 #/dev/sdf3:
-UUID=0C5C18DB0C5C18DB   /media/数据库      ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
+UUID=0C5C18DB0C5C18DB   /media/数据库      			ntfs    defaults,utf8,uid=1000,gid=1000, umask=000   0       0
 #/dev/sde:
-UUID="91710f38-2a36-4259-8384-805432b92292"		/media/Movie2 	ext4 	users,noauto,noatime,diratime 0 0
+UUID=91710f38-2a36-4259-8384-805432b92292		/media/Movie2	auto defaults 0 0
 #/dev/sda:
-UUID="e74142f9-338a-4117-9c3b-9f3c95410243"		/media/Movie1	ext4	users,noauto,noatime,diratime 0 0
-UUID="9e036d68-0915-4af3-8160-8ded83fa998d"		/media/临时存储	ext4	users,noauto,noatime,diratime 0 0
-UUID="e7c88805-22d6-4b02-bfa8-d0fb0ac7a63e"		/media/sdg4T	ext4	users,noauto,noatime,diratime 0 0
+UUID="e74142f9-338a-4117-9c3b-9f3c95410243"		/media/Movie1	auto defaults 0 0
+UUID=860837DAC521CB40		/media/sdg4T	ntfs    defaults,utf8,uid=1000,gid=1000, umask=000 0 0
 #最后的0为开机检测，1为开机不检测，如果磁盘无法挂载会无法启动
 ------------------------------------------------------------------------------------------------------------------
 
 
-sudo mount /dev/sdg1 
-sudo mount /dev/sdh1 
-
+sudo mount /dev/sdh1 /media/临时存储
+sudo chmod -R 777 /media/sdg4T
